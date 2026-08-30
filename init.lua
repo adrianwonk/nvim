@@ -2,7 +2,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 require("config.lazy")
-require("config.vimplug")
 
 vim.opt.termguicolors = true
 vim.opt.hlsearch = true
@@ -33,24 +32,6 @@ vim.keymap.set("n", "<leader>w", "<C-w>w", { desc = "Cycle Windows" })
 
 vim.g.netrw_winsize = -50
 
-vim.keymap.set("n", "<leader>e", function()
-  local netrw_win = nil
-  -- 1. Search for an existing Netrw window
-  for _, win in ipairs(vim.api.nvim_list_wins()) do
-    local buf = vim.api.nvim_win_get_buf(win)
-    if vim.bo[buf].filetype == "netrw" then
-      netrw_win = win
-      break
-    end
-  end
-
-  -- 2. If found, jump to it. If not, open it.
-  if netrw_win then
-    vim.api.nvim_set_current_win(netrw_win)
-  else
-    vim.cmd("Lexplore")
-  end
-end, { desc = "Smart Toggle Lexplore" })
 
 local function hi(group, opts)
     vim.api.nvim_set_hl(0, group, opts)
